@@ -1,0 +1,23 @@
+:root {
+  --div-width: 0px;
+}
+
+body {
+  background-color: #333;
+  color: aliceblue;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  border: 1px solid aliceblue;
+  margin-block: 1rem;
+  padding: 0.5rem;
+}
+
+.checkbox:checked + p {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

@@ -8,6 +8,8 @@ const deleteTask = id => {
   const updatedTasks = allTasks.filter(task => task.id !== id);
   allTasks = updatedTasks;
   printTasks(allTasks);
+
+  console.log('DELETE', allTasks);
 };
 
 const saveTask = task => {
@@ -18,6 +20,21 @@ const saveTask = task => {
   };
   allTasks.push(newTask);
   printTasks(allTasks);
+
+  console.log('CREATE', allTasks);
+};
+
+const updateTask = id => {
+  const updatedTasks = allTasks.map(task => {
+    if (task.id === id) {
+      task.completed = !task.completed;
+    }
+    return task;
+  });
+  allTasks = updatedTasks;
+  printTasks(allTasks);
+
+  console.log('UPDATE', allTasks);
 };
 
 const generateHtmlTask = task => {
@@ -27,6 +44,8 @@ const generateHtmlTask = task => {
   const newInput = document.createElement('input');
   newInput.type = 'checkbox';
   newInput.checked = task.completed;
+
+  newInput.addEventListener('change', () => updateTask(task.id));
 
   const newText = document.createElement('p');
   newText.textContent = task.task;

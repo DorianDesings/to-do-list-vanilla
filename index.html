@@ -11,13 +11,12 @@
     <form id="form">
       <input id="input" name="task" type="text" placeholder="write your task" />
     </form>
-    <div id="tasks">
-      <div class="task">
-        <input type="checkbox" class="checkbox" />
-        <p>Tarea de ejemplo</p>
-        <button>X</button>
-      </div>
+    <div id="filters">
+      <button data-filter="all">All</button>
+      <button data-filter="uncompleted">Uncompleted</button>
+      <button data-filter="completed">Completed</button>
     </div>
+    <div id="tasks"></div>
     <script src="js/scripts.js"></script>
   </body>
 </html>

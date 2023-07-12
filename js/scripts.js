@@ -70,8 +70,30 @@ const printTasks = tasks => {
   tasksElement.append(fragment);
 };
 
+const filterTasks = filter => {
+  const parsedFilter = Number(filter);
+  let tasksToRender = [...allTasks];
+  if (parsedFilter === 1) {
+    tasksToRender = allTasks.filter(task => !task.completed);
+    console.log('UNCOMPLETED', tasksToRender);
+  } else if (parsedFilter === 2) {
+    tasksToRender = allTasks.filter(task => task.completed);
+    console.log('COMPLETED', tasksToRender);
+  } else {
+    console.log('ALL', tasksToRender);
+  }
+  printTasks(tasksToRender);
+};
+
 formElement.addEventListener('submit', event => {
   event.preventDefault();
-  saveTask(event.target.task.value);
+  const task = event.target.task.value;
+  if (!task) return;
+  saveTask(task);
   formElement.reset();
+});
+
+filtersElement.addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  filterTasks(e.target.dataset.filter);
 });

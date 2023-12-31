@@ -8,18 +8,7 @@ const allFilters = document.querySelectorAll('.filter');
 
 let darkMode = false;
 
-let allTasks = [
-  {
-    id: Date.now() + Math.random(),
-    task: 'Read for 1 hour',
-    completed: false
-  },
-  {
-    id: Date.now() + Math.random(),
-    task: 'Complete Todo App',
-    completed: true
-  }
-];
+let allTasks = [];
 
 const changeTheme = () => {
   darkMode = !darkMode;
@@ -48,7 +37,9 @@ const getFilteredTasks = () => {
 
 const countItemsLeft = () => {
   const itemsLeft = allTasks.filter(task => !task.completed).length;
-  if (itemsLeft === 0) {
+  if (allTasks.length === 0) {
+    itemsLeftElement.textContent = 'No tasks';
+  } else if (itemsLeft === 0) {
     itemsLeftElement.textContent = 'All tasks completed!';
   } else {
     itemsLeftElement.textContent = `${itemsLeft} items left`;
@@ -84,10 +75,9 @@ const insertTasks = tasks => {
     newTaskContainer.append(newTaskCheck, newTaskText, newTaskDelete);
 
     fragment.append(newTaskContainer);
-
-    tasksElement.textContent = '';
   });
 
+  tasksElement.textContent = '';
   tasksElement.append(fragment);
   countItemsLeft();
 };
@@ -100,6 +90,7 @@ const saveTask = task => {
 
 const deleteTask = id => {
   allTasks = allTasks.filter(task => task.id !== id);
+  console.log(allTasks);
   insertTasks(allTasks);
 };
 

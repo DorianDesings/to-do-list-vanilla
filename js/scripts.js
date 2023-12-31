@@ -26,10 +26,10 @@ const changeTheme = () => {
 
   if (darkMode) {
     document.body.classList.add('dark');
-    switchElement.src = '/assets/images/icon-sun.svg';
+    switchElement.src = './assets/images/icon-sun.svg';
   } else {
     document.body.classList.remove('dark');
-    switchElement.src = '/assets/images/icon-moon.svg';
+    switchElement.src = './assets/images/icon-moon.svg';
   }
 };
 

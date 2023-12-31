@@ -79,6 +79,7 @@ body.dark {
 
 .switch {
   width: 20px;
+  cursor: pointer;
 }
 
 .main {

@@ -137,6 +137,7 @@ body.dark {
   height: 3rem;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid rgba(151, 151, 151, 0.3);
+  cursor: pointer;
 }
 
 .task-container:last-child {
@@ -227,8 +228,13 @@ body.dark {
   color: var(--text-color-completed);
   font-weight: bold;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .filter--active {
   color: #3a7cfd;
+}
+
+.click-element {
+  cursor: pointer;
 }

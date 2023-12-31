@@ -6,7 +6,7 @@
 
 :root {
   --body-bg: #fafafa;
-  --header-image: url('/assets/images/bg-mobile-light.jpg');
+  --header-image: url('../assets/images/bg-mobile-light.jpg');
   --task-bg: #fff;
   --text-color: #494c6b;
   --text-color-completed: #9092a5;
@@ -26,7 +26,7 @@ body {
 
 body.dark {
   --body-bg: #171823;
-  --header-image: url('/assets/images/bg-mobile-dark.jpg');
+  --header-image: url('../assets/images/bg-mobile-dark.jpg');
   --task-bg: #393a4b;
   --text-color: #c8cbe7;
   --text-color-completed: #8c8ca2;
@@ -36,7 +36,7 @@ body.dark {
 
 @media screen and (min-width: 768px) {
   .body.dark {
-    --header-image: url('/assets/images/bg-desktop-dark.jpg');
+    --header-image: url('../assets/images/bg-desktop-dark.jpg');
     --task-bg: #25273d;
   }
 }
@@ -51,7 +51,7 @@ body.dark {
 
 @media screen and (min-width: 768px) {
   .header {
-    --header-image: url('/assets/images/bg-desktop-light.jpg');
+    --header-image: url('../assets/images/bg-desktop-light.jpg');
   }
 }
 
@@ -167,7 +167,7 @@ body.dark {
 }
 
 .task-check:checked + .task-text::after {
-  background-image: url('/assets/images/icon-check.svg'), linear-gradient(45deg, #55ddff, #c058f3);
+  background-image: url('../assets/images/icon-check.svg'), linear-gradient(45deg, #55ddff, #c058f3);
   background-repeat: no-repeat;
   background-size: 10px 8px, cover;
   background-position: center;

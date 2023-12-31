@@ -4,19 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Document</title>
   </head>
   <body>
-    <form id="form">
-      <input id="input" name="task" type="text" placeholder="write your task" />
-    </form>
-    <div id="filters">
-      <button data-filter="all">All</button>
-      <button data-filter="uncompleted">Uncompleted</button>
-      <button data-filter="completed">Completed</button>
-    </div>
-    <div id="tasks"></div>
+    <header class="header">
+      <div class="header__content">
+        <h1 class="title">TODO</h1>
+        <img id="switch" class="switch" src="assets/images/icon-moon.svg" alt="" />
+      </div>
+    </header>
+    <main class="main">
+      <form id="form" class="form">
+        <label for="input-task" class="label-task"></label>
+        <input class="input-task" id="input-task" name="task" type="text" placeholder="Create a new todo..." />
+      </form>
+      <div id="tasks" class="tasks"></div>
+      <div class="tasks-footer">
+        <span id="items-left">5 items left</span>
+        <span id="delete-completed">Clear Completed</span>
+      </div>
+      <div id="filters" class="filters">
+        <button data-filter="all" class="filter filter--active">All</button>
+        <button data-filter="active" class="filter">Active</button>
+        <button data-filter="completed" class="filter">Completed</button>
+      </div>
+    </main>
     <script src="js/scripts.js"></script>
   </body>
 </html>

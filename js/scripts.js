@@ -1,63 +1,106 @@
 const tasksElement = document.getElementById('tasks');
 const filtersElement = document.getElementById('filters');
 const formElement = document.getElementById('form');
+const itemsLeftElement = document.getElementById('items-left');
+const deleteCompleteElement = document.getElementById('delete-completed');
+const switchElement = document.getElementById('switch');
+const allFilters = document.querySelectorAll('.filter');
 
-const filters = {
-  all: 0,
-  uncomplete: 1,
-  complete: 2
+let darkMode = false;
+
+let allTasks = [
+  {
+    id: Date.now() + Math.random(),
+    task: 'Read for 1 hour',
+    completed: false
+  },
+  {
+    id: Date.now() + Math.random(),
+    task: 'Complete Todo App',
+    completed: true
+  }
+];
+
+const changeTheme = () => {
+  darkMode = !darkMode;
+
+  if (darkMode) {
+    document.body.classList.add('dark');
+    switchElement.src = 'assets/images/icon-sun.svg';
+  } else {
+    document.body.classList.remove('dark');
+    switchElement.src = 'assets/images/icon-moon.svg';
+  }
 };
 
-let allTasks = [];
+const getFilteredTasks = () => {
+  const currentFilter = document.querySelector('.filter--active').dataset.filter;
+  let filteredTasks = allTasks;
 
-// Escuchar el evento de envío del formulario ✅
-// Obtener el valor de lo que hay escrito ✅
-// Meter tarea en el objeto de tareas ✅
-// Generar el HTML de cada tarea ✅
-// Meter el HTML en el contenedor de tareas ✅
-// Borrar tarea ✅
-// Actualizar tarea ✅
+  if (currentFilter === 'active') {
+    filteredTasks = allTasks.filter(task => !task.completed);
+  } else if (currentFilter === 'completed') {
+    filteredTasks = allTasks.filter(task => task.completed);
+  }
 
-const generateHtmlForTask = task => {
-  const newDiv = document.createElement('div');
-  newDiv.classList.add('task');
-  const newCheckbox = document.createElement('input');
-  newCheckbox.type = 'checkbox';
-  newCheckbox.checked = task.completed;
-  const newTask = document.createElement('p');
-  newTask.textContent = task.task;
-  const newButton = document.createElement('button');
-  newButton.textContent = 'X';
-
-  newButton.addEventListener('click', () => deleteTask(task.id));
-  newCheckbox.addEventListener('change', () => completeTask(task.id));
-
-  newDiv.append(newCheckbox, newTask, newButton);
-
-  return newDiv;
+  return filteredTasks;
 };
 
-const insertTasks = () => {
-  tasksElement.textContent = '';
+const countItemsLeft = () => {
+  const itemsLeft = allTasks.filter(task => !task.completed).length;
+  if (itemsLeft === 0) {
+    itemsLeftElement.textContent = 'All tasks completed!';
+  } else {
+    itemsLeftElement.textContent = `${itemsLeft} items left`;
+  }
+};
+
+const insertTasks = tasks => {
   const fragment = document.createDocumentFragment();
-  allTasks.forEach(task => {
-    const newTask = generateHtmlForTask(task);
-    fragment.append(newTask);
+
+  tasks.forEach(task => {
+    const newTaskContainer = document.createElement('div');
+    newTaskContainer.classList.add('task-container');
+
+    const newTaskCheck = document.createElement('input');
+    newTaskCheck.classList.add('task-check');
+    newTaskCheck.type = 'checkbox';
+    newTaskCheck.checked = task.completed;
+    newTaskCheck.id = task.id;
+
+    const newTaskText = document.createElement('label');
+    newTaskText.classList.add('task-text');
+    newTaskText.textContent = task.task;
+    newTaskText.htmlFor = task.id;
+
+    const newTaskDelete = document.createElement('img');
+    newTaskDelete.classList.add('task-delete');
+    newTaskDelete.src = 'assets/images/icon-cross.svg';
+
+    newTaskDelete.addEventListener('click', () => deleteTask(task.id));
+
+    newTaskCheck.addEventListener('change', () => completeTask(task.id));
+
+    newTaskContainer.append(newTaskCheck, newTaskText, newTaskDelete);
+
+    fragment.append(newTaskContainer);
+
+    tasksElement.textContent = '';
   });
 
   tasksElement.append(fragment);
+  countItemsLeft();
 };
 
 const saveTask = task => {
   allTasks.push(task);
-  insertTasks();
+  const tasksToRender = getFilteredTasks();
+  insertTasks(tasksToRender);
 };
 
 const deleteTask = id => {
   allTasks = allTasks.filter(task => task.id !== id);
-
-  insertTasks();
-  // All tasks menos la que coincida con el id
+  insertTasks(allTasks);
 };
 
 const completeTask = id => {
@@ -68,9 +111,8 @@ const completeTask = id => {
     return task;
   });
 
-  console.log(allTasks);
-
-  insertTasks();
+  const filteredTasks = getFilteredTasks();
+  insertTasks(filteredTasks);
 };
 
 const createTask = task => {
@@ -83,9 +125,28 @@ const createTask = task => {
   saveTask(newTask);
 };
 
-const filterTasks = filter => {
-  console.log(filter);
+const changeFilter = filterTarget => {
+  [...allFilters].forEach(filter => {
+    filter.classList.remove('filter--active');
+  });
+
+  filterTarget.classList.add('filter--active');
 };
+
+const filterTasks = filterTarget => {
+  changeFilter(filterTarget);
+  const filteredTasks = getFilteredTasks(filterTarget);
+  insertTasks(filteredTasks);
+};
+
+const deleteAllCompleteTasks = () => {
+  allTasks = allTasks.filter(task => !task.completed);
+  insertTasks(allTasks);
+};
+
+insertTasks(allTasks);
+
+switchElement.addEventListener('click', changeTheme);
 
 formElement.addEventListener('submit', event => {
   event.preventDefault();
@@ -94,7 +155,9 @@ formElement.addEventListener('submit', event => {
   event.target.reset();
 });
 
+deleteCompleteElement.addEventListener('click', deleteAllCompleteTasks);
+
 filtersElement.addEventListener('click', event => {
   if (event.target.tagName !== 'BUTTON') return;
-  filterTasks(event.target.dataset.filter);
+  filterTasks(event.target);
 });

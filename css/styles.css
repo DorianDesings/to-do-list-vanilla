@@ -25,6 +25,11 @@ body {
   background-color: #111;
 }
 
+@media screen and (min-width: 768px) {
+  body {
+    --header-image: url('../assets/images/bg-desktop-light.jpg');
+  }
+}
 body.dark {
   --body-bg: #171823;
   --header-image: url('../assets/images/bg-mobile-dark.jpg');
@@ -48,12 +53,6 @@ body.dark {
   background-image: var(--header-image);
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-@media screen and (min-width: 768px) {
-  .header {
-    --header-image: url('../assets/images/bg-desktop-light.jpg');
-  }
 }
 
 .header__content {

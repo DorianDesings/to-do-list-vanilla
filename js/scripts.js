@@ -8,7 +8,13 @@ const allFilters = document.querySelectorAll('.filter');
 
 let darkMode = false;
 
-let allTasks = [];
+let allTasks = [
+  {
+    id: Date.now(),
+    task: 'Make a todo app',
+    completed: false
+  }
+];
 
 const changeTheme = () => {
   darkMode = !darkMode;

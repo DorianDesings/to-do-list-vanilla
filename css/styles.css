@@ -15,13 +15,14 @@
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   max-width: 1440px;
   text-align: center;
   color: var(--text-color-completed);
   background-color: var(--body-bg);
   font-family: 'Josefin Sans', sans-serif;
   user-select: none;
+  background-color: #111;
 }
 
 body.dark {

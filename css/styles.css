@@ -33,7 +33,7 @@ body {
 body.dark {
   --body-bg: #171823;
   --header-image: url('../assets/images/bg-mobile-dark.jpg');
-  --task-bg: #393a4b;
+  --task-bg: #25273d;
   --text-color: #c8cbe7;
   --text-color-completed: #8c8ca2;
   --placeholder-color: #9495a5;
@@ -41,9 +41,8 @@ body.dark {
 }
 
 @media screen and (min-width: 768px) {
-  .body.dark {
+  body.dark {
     --header-image: url('../assets/images/bg-desktop-dark.jpg');
-    --task-bg: #25273d;
   }
 }
 

@@ -54,7 +54,7 @@ body.dark {
   background-size: cover;
 }
 
-.header__content {
+.header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;

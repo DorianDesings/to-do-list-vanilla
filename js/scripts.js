@@ -8,6 +8,17 @@ const allFilters = document.querySelectorAll('.filter');
 
 let darkMode = false;
 
+let darkMode = false;
+
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  darkMode = true;
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+  darkMode = event.matches;
+  console.log(darkMode);
+});
+
 let allTasks = [
   {
     id: Date.now(),

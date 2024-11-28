@@ -215,7 +215,7 @@ body.dark {
   .filters {
     position: absolute;
     bottom: 1.25rem;
-    left: 6rem;
+    left: 4rem;
     width: 168px;
     transform: translateX(50%);
   }
